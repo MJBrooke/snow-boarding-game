@@ -10,11 +10,10 @@ public class CrashDetector : MonoBehaviour
     {
         // This is saying 'has anything collided with my head?'
         // In this case, if it's the ground, we restart the level.
-        if (other.CompareTag("Ground"))
-        {
-            bloodParticles.Play(true);
-            Invoke(nameof(ReloadScene), reloadDelay);
-        }
+        if (!other.CompareTag("Ground")) return;
+        
+        bloodParticles.Play();
+        Invoke(nameof(ReloadScene), reloadDelay);
     }
     
     //Wrap static function from SceneManager into a local function for the invoker
