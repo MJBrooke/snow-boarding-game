@@ -4,13 +4,7 @@ using UnityEngine.SceneManagement;
 public class CrashDetector : MonoBehaviour
 {
     [SerializeField] private float reloadDelay = 0.5f;
-    
-    private ParticleSystem _bloodParticles;
-
-    private void Start()
-    {
-        _bloodParticles = GetComponentInChildren<ParticleSystem>();
-    }
+    [SerializeField] private ParticleSystem bloodParticles;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,7 +12,7 @@ public class CrashDetector : MonoBehaviour
         // In this case, if it's the ground, we restart the level.
         if (other.CompareTag("Ground"))
         {
-            _bloodParticles.Play(true);
+            bloodParticles.Play(true);
             Invoke(nameof(ReloadScene), reloadDelay);
         }
     }
