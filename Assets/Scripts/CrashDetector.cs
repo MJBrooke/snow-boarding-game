@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CrashDetector : MonoBehaviour
 {
     [Tooltip("Time between the crash and the game restarting")]
-    [SerializeField] private float reloadDelay = 0.5f;
+    [SerializeField] private float reloadDelay = 3f;
     
     [Tooltip("The blood particles that should be played on death")]
     [SerializeField] private ParticleSystem bloodParticles;
@@ -31,7 +31,9 @@ public class CrashDetector : MonoBehaviour
         if (!other.CompareTag("Ground") || _hasCrashed) return;
         
         _hasCrashed = true;
+        FindObjectOfType<SurfaceEffector2D>().enabled = false; // Stop the ground from continuing to push the player
         FindObjectOfType<PlayerController>().DisableControls(); // Get a direct reference to the PlayerController class and disable controls
+        FindObjectOfType<SnowTrail>().StopSnowTrail(); // Stop particles from flying out while dead
         bloodParticles.Play(); // Manually start the particles when the head hits the floor
         _audioSource.PlayOneShot(crashSound); // Play the crash sound once
         Invoke(nameof(ReloadScene), reloadDelay); // Restart the game after a specified time
