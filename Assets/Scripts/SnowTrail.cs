@@ -1,11 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles stopping/starting the snow particles left behind after the player rides across the ground
+/// </summary>
 public class SnowTrail : MonoBehaviour
 {
-    // We want to control a snow particle behind the board
-    //  If we're touching the ground, we should switch on the particles.
-    //  When we leave the ground, we turn them off
-    
+    [Tooltip("The particles that should play while riding across the snow")]
     [SerializeField] private ParticleSystem snowParticles;
 
     private void OnCollisionEnter2D(Collision2D other)

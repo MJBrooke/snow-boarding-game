@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Detects when the player has crossed the finish line
+/// </summary>
 public class FinishLine : MonoBehaviour
 {
+    [Tooltip("Sound effect to be played when the player crosses the line")]
     [SerializeField] private AudioSource audioSource; // We can get the AudioSource directly if assigned in the Inspector explicitly.
+    
+    [Tooltip("Amount of seconds between reaching the finish line and the game restarting")]
     [SerializeField] private float reloadDelay = 2f;
+    
     private ParticleSystem _finishDazzle;
     private bool _finished;
 
-    private void Start()
+    private void Awake()
     {
         _finishDazzle = GetComponentInChildren<ParticleSystem>();
     }
