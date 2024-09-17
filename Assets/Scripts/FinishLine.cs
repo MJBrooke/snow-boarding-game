@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class FinishLine : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource; // We can get the AudioSource directly if assigned in the Inspector explicitly.
     [SerializeField] private float reloadDelay = 2f;
     private ParticleSystem _finishDazzle;
 
@@ -18,6 +19,7 @@ public class FinishLine : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         
+        audioSource.Play(); // The correct AudioClip has already been attached in the Unity editor. We can just play it.
         _finishDazzle.Play();
         Invoke(nameof(ReloadScene), reloadDelay);
     }
