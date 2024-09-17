@@ -9,6 +9,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
     private SurfaceEffector2D _surfaceEffector;
 
+    // A public function can be directly invoked in other Scripts a line such as the following:
+    //  FindObjectOfType<PlayerController>().DisableControls();
+    // This lets you make directly manipulate behaviours via their public methods/API.
+    public void DisableControls()
+    {
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
     private void Start()
     {
         // GetComponent fetches a component off of the same GameObject that this script belongs to. Efficient.

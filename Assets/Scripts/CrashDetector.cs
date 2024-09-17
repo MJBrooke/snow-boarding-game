@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +7,8 @@ public class CrashDetector : MonoBehaviour
     [SerializeField] private ParticleSystem bloodParticles;
     [SerializeField] private AudioClip crashSound; // Direct reference to the Crash+SFX.ogg file
     private AudioSource _audioSource; // This audio source has no AudioClip assigned - it's just there to produce the sound we give it in code.
-
+    private bool _hasCrashed;
+    
     private void Start()
     {
         // Get the audio source component attached to the Snow Boarder
@@ -19,8 +19,10 @@ public class CrashDetector : MonoBehaviour
     {
         // This is saying 'has anything collided with my head?'
         // In this case, if it's the ground, we restart the level.
-        if (!other.CompareTag("Ground")) return;
+        if (!other.CompareTag("Ground") || _hasCrashed) return;
         
+        _hasCrashed = true;
+        FindObjectOfType<PlayerController>().DisableControls(); // Get a direct reference to the PlayerController class and disable controls
         bloodParticles.Play(); // Manually start the particles when the head hits the floor
         _audioSource.PlayOneShot(crashSound); // Play the crash sound once
         Invoke(nameof(ReloadScene), reloadDelay); // Restart the game after a specified time
