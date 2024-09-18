@@ -13,3 +13,11 @@ Controls:
 Objective: Get to the finish line by staying on your board to the end without hitting your head
 
 Boosting greatly increases your speed, allowing for better jumps!
+
+[//]: # (TODO Ideas:)
+[//]: # (- Menu system on start and death)
+[//]: # (- Animations)
+[//]: # (- Music and sound effects)
+[//]: # (- Hoops to jump through?)
+[//]: # (- Randomly generated terrain?)
+[//]: # (- Better rotation feel?)
